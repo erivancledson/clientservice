@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="clienteModulo">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+     
+    <link rel="icon" href="imagens/favicon.png">
+
+
+    <title>Erivan</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/estilos.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+    <script src="controller/clientes.js"></script>
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body ng-controller="clienteController">
+       <div ng-include  src="'menus.html'"></div>
+    
+      <h1 align="center">Lista e cadastro de Clientes</h1>
+      <form class="form-horizontal">
+         <div class="form-group">
+            <label for="codigo" class="col-sm-2 control-label">Código</label>
+            <div class="col-sm-2">
+              <input type="text" required ng-model="cliente.codigo" class="form-control" id="codigo" placeholder="Codigo">
+            </div>
+          </div> 
+          <div class="form-group"> 
+              <label class="col-sm-2 control-label" for="nome">Nome</label>
+              <div class="col-sm-8">
+                <input type="text" required ng-model="cliente.nome" class="form-control" id="nome" placeholder="Nome">
+              </div>
+          </div>
+          <div class="form-group">
+              <label class="col-sm-2 control-label" for="descricao">Descrição</label>
+               <div class="col-sm-6">
+                  <input type="text" ng-model="cliente.descricao" class="form-control" id="descricao" placeholder="Descrição">
+                </div>
+          </div>
+           <div class="form-group">
+              <label class="col-sm-2 control-label" for="servico">Serviço</label>
+               <div class="col-sm-4">
+                  <select class="form-control" ng-model="cliente.servicoModel"
+                     ng-options="servicoModel.nome for servicoModel in servicos track by servicoModel.codigo" >
+                </select>
+                </div>
+            </div>
+            <br>
+            <div align="center" class="form-group">
+              <button type="submit" ng-click="limparCampos()" class="btn btn-success">Novo</button>
+              <button ng-disabled="!cliente.nome"  type="submit" ng-click="salvar()" class="btn btn-primary">Gravar</button>
+              <button type="submit" ng-click="excluir()" class="btn btn-danger">Excluir</button>
+              <label>Pesquisa de Clientes: </label>
+              <input type="text" id="pesquisa" ng-model="pesquisaCliente" placeholder="Digite a pesquisa">
+          </div>
+      </form>
+      <div class="container">
+      <table class="table table-striped table-hover">
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Serviço</th>  
+        <tr ng-repeat="clientesTabela in clientes | filter:pesquisaCliente" ng-click="selecionacliente(clientesTabela)">
+          <td>{{clientesTabela.codigo}}</td>
+          <td>{{clientesTabela.nome}}</td>
+          <td>{{clientesTabela.descricao}}</td>
+          <td>{{clientesTabela.servicoModel.nome}}</td>
+        </tr> 
+      </table>
+      </div>     
+      <br>
+      <footer>
+     
+        <p>&copy; Erivan. &middot; <a href="#">programmer</a> &middot; <a href="#">erivan costa</a></p>
+      </footer>
+    
+
+    <!-- Placed at the end of the document so the pages load faster -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="js/holder.min.js"></script>
+   
+  </body>
+</html>
